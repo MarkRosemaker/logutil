@@ -9,13 +9,10 @@ import (
 	"time"
 )
 
-const (
-	dir   = "logs"
-	level = slog.LevelDebug
-)
+const dir = "logs"
 
-// Start starts logging, both in a file under logs/ named after the current time, and to stdout.
-func Start(ctx context.Context) (func() error, error) {
+// Start starts logging from level up, both in a file under logs/ named after the current time, and to stdout.
+func Start(ctx context.Context, level slog.Level) (func() error, error) {
 	slog.SetLogLoggerLevel(level)
 
 	if err := os.MkdirAll(dir, 0o755); err != nil {
